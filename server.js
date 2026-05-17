@@ -47,6 +47,17 @@ function normalizeToken(value) {
     .replace(/^-+|-+$/g, '');
 }
 
+function parseMetadata(rawMetadata) {
+  if (!rawMetadata) return {};
+  if (typeof rawMetadata === 'object') return rawMetadata;
+  try {
+    return JSON.parse(rawMetadata);
+  } catch (err) {
+    return {};
+  }
+}
+
+
 function parseStudentIdentity(rawValue) {
   const raw = String(rawValue || '').trim();
   const bridgeCodeMatch = raw.toUpperCase().match(/STUDENT-(BRIDGE-\d{2}-\d{2})@/);
